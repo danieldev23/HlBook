@@ -42,7 +42,23 @@ public class ChooseFile extends Application {
             imagePopup.setAutoHide(true); // Tự động ẩn khi click ngoài popup
             imagePopup.show(imageView.getScene().getWindow());
         }
+//        public void delete(ActionEvent event) throws SQLException {
+//            int postIdDelete = getPostIdDelete();
+//            System.out.println("Post delete " + postIdDelete);
+//            boolean result = new Post().deletePostById(postIdDelete);
+//            if(result) {
+//
+//                Platform.runLater(() -> {
+//                    showViewPostRandom();
+//                });
+//            }
+//        }
+//        public void edit(ActionEvent event) {
+//            System.out.println("Edit button clicked!");
+//        }
     }
+
+
 
     public static void main(String[] args) {
         launch(args);

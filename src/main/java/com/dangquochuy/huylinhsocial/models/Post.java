@@ -55,6 +55,34 @@ public class Post extends ConnectDatabase{
         }
         return listPost;
     }
+
+    public boolean deletePostById(int postId) throws SQLException {
+        Connection conn = getConnection(DB_URL, USER_NAME, PASSWORD);
+        try (PreparedStatement pstmt = conn.prepareStatement("DELETE FROM posts WHERE id = ?")) {
+            pstmt.setInt(1, postId);
+            int affectedRows = pstmt.executeUpdate();
+            conn.close();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void editPostById(int postId, String newContent, String newImage) throws SQLException {
+        Connection conn = getConnection(DB_URL, USER_NAME, PASSWORD);
+        try (PreparedStatement pstmt = conn.prepareStatement("UPDATE posts SET post_content = ?, image = ? WHERE id = ?")) {
+            pstmt.setString(1, newContent);
+            pstmt.setString(2, newImage);
+            pstmt.setInt(3, postId);
+
+            int affectedRows = pstmt.executeUpdate();
+            conn.close();
+
+//            return affectedRows > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public List<String[]> getUserPost() throws SQLException {
         List<String[]>  listPost = getAllPost();
         List<String[]> userPost = new ArrayList<>();
@@ -84,6 +112,17 @@ public class Post extends ConnectDatabase{
     }
     //    SQL reset posts: TRUNCATE TABLE posts; ALTER TABLE posts AUTO_INCREMENT = 1;
     public static void main(String[] args) throws SQLException {
+        int postIdToDelete = 1;
+        boolean result = new Post().deletePostById(postIdToDelete);
+
+        if (result) {
+            System.out.println("Post deleted successfully.");
+        } else {
+            System.out.println("Failed to delete post. Post with ID " + postIdToDelete + " not found.");
+        }
+
+        // In danh sách bài viết sau khi xoá
         new Post().PrintPost();
+
     }
 }

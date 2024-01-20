@@ -10,10 +10,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
@@ -33,8 +30,11 @@ public class HlBookController implements Initializable {
     private String image;
     @FXML
     private ImageView profileAuthor;
+    private int postIdDelete;
     @FXML
     private ImageView userImg;
+    @FXML
+    private Button editBtn;
     @FXML
     private ImageView imgProfilePost;
     @FXML
@@ -44,7 +44,8 @@ public class HlBookController implements Initializable {
     @FXML
     public VBox root;
     @FXML
-    private WebView webView = new WebView();
+    private WebView webViewYoutube = new WebView();
+
     @FXML
     public Label PostAuthor;
     @FXML
@@ -132,6 +133,14 @@ public class HlBookController implements Initializable {
         String name = new User().getName();
         this.name.setText(name);
         usernamePost.setText(name);
+    }
+
+    public int getPostIdDelete() {
+        return postIdDelete;
+    }
+
+    public void setPostIdDelete(int postIdDelete) {
+        this.postIdDelete = postIdDelete;
     }
 
     public String getPostCaption() {
@@ -233,6 +242,8 @@ public class HlBookController implements Initializable {
             PostAuthor.setText(name);
             profileAuthor.setImage(new Image(getAvatar()));
             randomPostDate.setText(new GetCurrentTime().getFormatTime());
+            setPostIdDelete(Integer.parseInt(postRandom[0]));
+            System.out.println("Post id delete: " + getPostIdDelete());
             captionPostRandom.setText(postRandom[2]);
             if(postRandom[3] == null) {
                 randomPostImage.setImage(new Image("https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"));
@@ -246,9 +257,55 @@ public class HlBookController implements Initializable {
             showViewPostRandom();
 
         }
+        if(new RandomPost().getQuantityPostUser() == 0) {
+            getShowPostUser().setPrefWidth(0.0);
+            getShowPostUser().setPrefHeight(0.0);
+            getShowPostUser().setVisible(false);
+        }
+    }
+    @FXML
+    public void delete(ActionEvent event) {
+        try {
+            int postIdDelete = getPostIdDelete();
+            System.out.println("Post delete " + postIdDelete);
+
+            boolean result = new Post().deletePostById(postIdDelete);
+            if (result) {
+                Platform.runLater(() -> {
+                    try {
+                        showRandomPostUser();
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Delete Post");
+                alert.setHeaderText(null);
+                alert.setContentText("Post with ID " + postIdDelete + " not found.");
+
+                alert.showAndWait();
+            }
+        } catch (SQLException e) {
+            // Xử lý lỗi SQL
+            e.printStackTrace();
+        }
+    }
+
+    public void edit(ActionEvent event) {
+        showPostImg(601.0, 527.0, true);
+        File file = fileChooser.showOpenDialog(postImgBtn.getScene().getWindow());
+        if (file != null) {
+            Image image = new Image(file.toURI().toString());
+            imgPostUser.setImage(image);
+            System.out.println(file.toURI().toString());
+            setImage(file.toURI().toString());
+        }
     }
     public void postImgButton(ActionEvent event) {
         showPostImg(601.0, 527.0, true);
+        editBtn.setVisible(true);
+
         File file = fileChooser.showOpenDialog(postImgBtn.getScene().getWindow());
         if (file != null) {
             Image image = new Image(file.toURI().toString());
@@ -273,7 +330,19 @@ public class HlBookController implements Initializable {
             }
         });
     }
+    public void editBtn(ActionEvent event) throws SQLException {
+        new Post().editPostById(getPostIdDelete(), getPostCaption(), getImage());
+        getPostImg().setVisible(false);
+        getPostImg().setManaged(false);
+        Platform.runLater(() -> {
+            try {
+                showRandomPostUser();
+            } catch (SQLException e) {
+                e.printStackTrace();
 
+            }
+        });
+    }
     public void setUsernameApi() throws Exception {
         this.usernameApi.setText("VnExpress");
     }
@@ -320,14 +389,14 @@ public class HlBookController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         try {
-            webView.setPrefWidth(510);
-            webView.setPrefHeight(380);
-            String videoURL = "https://www.youtube.com/embed/jLTuPyppBPc?si=csArQtoOrHIp5IoL?autoplay=1";
+            webViewYoutube.setPrefWidth(510);
+            webViewYoutube.setPrefHeight(380);
+            String videoURL = "https://www.youtube.com/embed/5s8upYHaj5U?si=W2WP5n0BuZcznz1j&autoplay=1";
 //            String videoURL = "https://www.youtube.com/embed/bP9gMpl1gyQ?autoplay=1";
 //            String videoURL = "https://www.dangquochuy.id.vn";
-            WebEngine engine = webView.getEngine();
+            WebEngine engine = webViewYoutube.getEngine();
             engine.load(videoURL);
-            root.getChildren().add(webView);
+            root.getChildren().add(webViewYoutube);
             init();
 
         } catch (Exception e) {
