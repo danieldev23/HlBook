@@ -1,0 +1,42 @@
+.page-background {
+    -fx-background-color: linear-gradient(to bottom right, #ebf4f5, #b5c6e0);
+    -fx-effect: dropShadow(three-pas-box, rgba(0, 0, 0, 0.1), 5.0, 0.0, 0.0, 5.0);
+}
+.text-filed-background {
+    -fx-background-color: linear-gradient(to right, #ebf4f5, #b5c6e0);
+    -fx-effect: dropShadow(three-pas-box, rgba(0, 0, 0, 0.1), 5.0, 0.0, 0.0, 5.0);
+}
+.bottom-text-field-input {
+    -fx-background-radius: 50;
+    -fx-border-radius: 50;
+    -fx-border-color: white;
+    -fx-border-width: 1;
+    -fx-background-color: rgba(236, 240, 241,1.0);
+}
+.register-text-field-input {
+    -fx-background-radius: 50;
+    -fx-border-radius: 50;
+    -fx-border-color: white;
+    -fx-border-width: 1;
+    -fx-background-color: linear-gradient(to bottom right, #ebf4f5, #b5c6e0);
+}
+.btn-action {
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-effect: dropShadow(three-pas-box, rgba(0, 0, 0, 0.1), 5.0, 0.0, 0.0, 5.0);
+}
+.main {
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: white;
+    -fx-border-width: 3;
+}
+.pane {
+    -fx-background-image: url("https://images.unsplash.com/photo-1556800468-84fcf08acdfc?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-border-color: transparent;
+    -fx-background-position: center center;
+}

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="570.0" prefWidth="1020.0" styleClass="page-background" stylesheets="@../../../../login.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dangquochuy.huylinhsocial.controllers.LoginController">
+   <children>
+      <AnchorPane layoutX="14.0" layoutY="14.0" prefWidth="510.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </AnchorPane>
+      <ImageView fitHeight="568.0" fitWidth="584.0" layoutX="-2.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/lggg.jpg" />
+         </image>
+      </ImageView>
+      <Pane layoutX="536.0" layoutY="-1.0" prefHeight="570.0" prefWidth="484.0" styleClass="page-background">
+         <children>
+            <Label alignment="CENTER" layoutX="90.0" layoutY="130.0" text="Đăng nhập HlBook">
+               <font>
+                  <Font name="Oriya MN Bold" size="34.0" />
+               </font>
+            </Label>
+            <TextField fx:id="email" layoutX="90.0" layoutY="217.0" prefHeight="43.0" prefWidth="299.0" promptText="Enter email">
+               <font>
+                  <Font size="17.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="page-background" />
+                  <String fx:value="bottom-text-field-input" />
+               </styleClass>
+            </TextField>
+            <Label layoutX="90.0" layoutY="192.0" text="Email">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="90.0" layoutY="276.0" text="Password">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="password" layoutX="90.0" layoutY="301.0" prefHeight="43.0" prefWidth="299.0" promptText="Enter your password">
+               <styleClass>
+                  <String fx:value="bottom-text-field-input" />
+                  <String fx:value="page-background" />
+               </styleClass>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </PasswordField>
+            <Label fx:id="warning" layoutX="132.0" layoutY="351.0" text="Tên đăng nhập hoặc mật khẩu sai!" textFill="#dd0000" visible="false">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnLogin" layoutX="93.0" layoutY="379.0" mnemonicParsing="false" onAction="#login" onMouseClicked="#login" prefHeight="43.0" prefWidth="297.0" style="-fx-background-color: linear-gradient(to right, #00c6ff, #0072ff);" styleClass="btn-action" text="Login" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnSignup" layoutX="93.0" layoutY="429.0" mnemonicParsing="false" onAction="#signup" prefHeight="43.0" prefWidth="297.0" style="-fx-background-color: linear-gradient(to right, #00d2ff, #3a7bd5);" styleClass="btn-action" text="Signup" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label layoutX="92.0" layoutY="483.0" text="Nếu chưa có tài khoản, hãy bấm vào nút Signup" textFill="#1e48f2">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
