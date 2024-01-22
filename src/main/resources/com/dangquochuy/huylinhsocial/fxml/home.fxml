@@ -6,6 +6,7 @@
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
@@ -184,6 +185,9 @@
                     <HBox.margin>
                         <Insets right="31.0" top="7.0" />
                     </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                 </Button>
             </children>
             <padding>
@@ -473,7 +477,7 @@
                                                       <Font name="Tahoma Bold" size="12.0" />
                                                   </font>
                                               </TextField>
-                                    <Button mnemonicParsing="false" onAction="#post" prefHeight="26.0" prefWidth="89.0" style="-fx-background-color: transparent;" text="Đăng bài">
+                                    <Button mnemonicParsing="false" onAction="#post" prefHeight="34.0" prefWidth="72.0" style="-fx-background-color: linear-gradient(to right, #56ccf2, #2f80ed); -fx-background-radius: 6;" text="Đăng bài" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
@@ -728,7 +732,7 @@
 
                                               <Pane prefHeight="60.0" prefWidth="64.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Button layoutX="24.0" layoutY="13.0" mnemonicParsing="false" onAction="#delete" prefHeight="22.0" prefWidth="42.0" style="-fx-background-color: transparent;">
+                                          <Button layoutX="64.0" layoutY="13.0" mnemonicParsing="false" onAction="#delete" prefHeight="22.0" prefWidth="42.0" style="-fx-background-color: transparent;">
                                              <graphic>
                                                           <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                                               <image>
@@ -740,7 +744,7 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
-                                          <Button layoutX="-10.0" layoutY="13.0" mnemonicParsing="false" onAction="#edit" prefHeight="22.0" prefWidth="42.0" style="-fx-background-color: transparent;">
+                                          <Button layoutX="29.0" layoutY="13.0" mnemonicParsing="false" onAction="#edit" prefHeight="22.0" prefWidth="42.0" style="-fx-background-color: transparent;">
                                              <graphic>
                                                 <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
@@ -753,11 +757,6 @@
                                              </cursor>
                                           </Button>
                                        </children></Pane>
-                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../../../images/moree.png" />
-                                       </image>
-                                    </ImageView>
                                           </children>
                                           <padding>
                                               <Insets left="20.0" right="20.0" />
@@ -797,11 +796,19 @@
                                                                       <Image url="@../../../../images/ic_care.png" />
                                                                   </image>
                                                               </ImageView>
-                                                              <Label fx:id="randomReactions" maxWidth="1.7976931348623157E308" text="12k lượt thích" textFill="#606266">
+                                                              <Label fx:id="randomReactions" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="20.0" text="990" textFill="#606266">
                                                                   <font>
                                                                       <Font name="SansSerif Regular" size="16.0" />
                                                                   </font>
                                                               </Label>
+                                                <Label fx:id="randomReactions1" maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="82.0" text="lượt thích" textFill="#606266">
+                                                   <font>
+                                                      <Font name="SansSerif Regular" size="16.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="4.0" />
+                                                   </HBox.margin>
+                                                </Label>
                                                           </children>
                                                       </HBox>
                                                       <Pane prefHeight="200.0" prefWidth="146.0" HBox.hgrow="ALWAYS" />
@@ -869,13 +876,20 @@
                                       </StackPane>
                                       <HBox stylesheets="@../../../../style.css">
                                           <children>
-                                              <HBox alignment="CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
+                                              <HBox alignment="CENTER" spacing="1.0" HBox.hgrow="ALWAYS">
                                                   <children>
-                                                      <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                                          <image>
-                                                              <Image url="@../../../../images/ic_like_outline.png" />
-                                                          </image>
-                                                      </ImageView>
+                                          <Button mnemonicParsing="false" onAction="#likePostBtn" style="-fx-background-color: transparent;">
+                                             <graphic>
+                                                            <ImageView fx:id="likeImg" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                                                <image>
+                                                                    <Image url="@../../../../images/ic_like_outline.png" />
+                                                                </image>
+                                                            </ImageView>
+                                             </graphic>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </Button>
                                                       <Label text="Thích" textFill="#606266">
                                                           <font>
                                                               <Font name="SansSerif Bold" size="16.0" />
@@ -1153,26 +1167,25 @@
                                   </VBox.margin>
                               </VBox>
 
-<!--                              Huy IT Post-->
-                              <VBox fx:id="postUser" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="601.0" spacing="10.0" styleClass="post-background" stylesheets="@../../../../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+                              <VBox fx:id="expressApi" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="601.0" spacing="10.0" styleClass="post-background" stylesheets="@../../../../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
                                   <children>
                                       <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="60.0" spacing="10.0" stylesheets="@../../../../style.css">
                                           <children>
-                                              <ImageView fx:id="imgProfile" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                              <ImageView fx:id="imgProfileApi" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                                   <image>
-                                                      <Image url="@../../../../images/logo.png" />
+                                                      <Image url="@../../../../images/dev.to.png" />
                                                   </image>
                                               </ImageView>
                                               <VBox alignment="CENTER" prefHeight="60.0" prefWidth="392.0">
                                                   <children>
-                                                      <HBox alignment="CENTER_LEFT">
+                                                      <HBox alignment="CENTER_LEFT" minWidth="-Infinity" prefHeight="21.0" prefWidth="507.0">
                                                           <children>
-                                                              <Label fx:id="username" text="Đặng Quốc Huy">
+                                                              <Label fx:id="usernameApi" prefHeight="21.0" prefWidth="58.0" text="Dev.to">
                                                                   <font>
                                                                       <Font name="SansSerif Bold" size="18.0" />
                                                                   </font>
                                                               </Label>
-                                                              <ImageView fx:id="imgVerified" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                                              <ImageView fx:id="imgVerifiedApi" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                                                   <image>
                                                                       <Image url="@../../../../images/bluetick.png" />
                                                                   </image>
@@ -1187,12 +1200,12 @@
                                                       </HBox>
                                                       <HBox alignment="CENTER_LEFT">
                                                           <children>
-                                                              <Label fx:id="date" text="12h" textFill="#616770">
+                                                              <Label fx:id="dateApi" text="12h" textFill="#616770">
                                                                   <font>
                                                                       <Font size="15.0" />
                                                                   </font>
                                                               </Label>
-                                                              <ImageView fx:id="audienceUser" fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
+                                                              <ImageView fx:id="audience" fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
                                                                   <image>
                                                                       <Image url="@../../../../images/ic_pub.png" />
                                                                   </image>
@@ -1204,37 +1217,31 @@
                                                       </HBox>
                                                   </children>
                                               </VBox>
-                                              <!--                                              Bài đăng dành cho người dùng-->
+<!--                                              Bài đăng dành cho người dùng-->
 
                                               <Pane prefHeight="200.0" HBox.hgrow="ALWAYS" />
-                                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                                  <image>
-                                                      <Image url="@../../../../images/moree.png" />
-                                                  </image>
-                                                  <HBox.margin>
-                                                      <Insets />
-                                                  </HBox.margin>
-                                              </ImageView>
                                           </children>
                                           <padding>
                                               <Insets left="20.0" right="20.0" />
                                           </padding>
                                       </HBox>
-                                      <Label fx:id="caption" maxWidth="1.7976931348623157E308" text="https://www.dangquochuy.id.vn/">
+                                      <Label fx:id="captionApi" maxWidth="1.7976931348623157E308" text="Social Network UI with JavaFx built by Danieldev" wrapText="true">
                                           <VBox.margin>
                                               <Insets left="20.0" right="20.0" />
                                           </VBox.margin>
                                           <font>
                                               <Font name="SansSerif Regular" size="16.0" />
                                           </font>
-                                 <cursor>
-                                    <Cursor fx:constant="TEXT" />
-                                 </cursor>
                                       </Label>
-                                      <ImageView fx:id="imgPost" fitHeight="535.0" fitWidth="535.0" pickOnBounds="true" preserveRatio="true">
-                                          <image>
-                                              <Image url="@../../../../images/anhdaidien.png" />
-                                          </image>
+                              <Hyperlink fx:id="urlAPI" ellipsisString="" prefHeight="23.0" prefWidth="538.0" text="https://www.dangquochuy.id.vn" underline="true" wrapText="true">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Hyperlink>
+                                      <ImageView fx:id="imgPostApi" fitHeight="535.0" fitWidth="535.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../images/anhdaidien.png" />
+                                 </image>
                                       </ImageView>
                                       <StackPane alignment="CENTER_LEFT">
                                           <children>
@@ -1257,7 +1264,7 @@
                                                                       <Image url="@../../../../images/ic_care.png" />
                                                                   </image>
                                                               </ImageView>
-                                                              <Label fx:id="hlReaction" maxWidth="1.7976931348623157E308" text="12k lượt thích" textFill="#606266">
+                                                              <Label fx:id="hlReactions" maxWidth="1.7976931348623157E308" text="12k lượt thích" textFill="#606266">
                                                                   <font>
                                                                       <Font name="SansSerif Regular" size="16.0" />
                                                                   </font>
@@ -1265,12 +1272,12 @@
                                                           </children>
                                                       </HBox>
                                                       <Pane prefHeight="200.0" prefWidth="146.0" HBox.hgrow="ALWAYS" />
-                                                      <Label fx:id="hlComment" text="2.3k bình luận" textFill="#606266">
+                                                      <Label fx:id="hlComments" text="2.3k bình luận" textFill="#606266">
                                                           <font>
                                                               <Font name="SansSerif Regular" size="16.0" />
                                                           </font>
                                                       </Label>
-                                                      <Label fx:id="hlShare" text="1.5k chia sẻ" textFill="#606266">
+                                                      <Label fx:id="hlShares" text="1.5k chia sẻ" textFill="#606266">
                                                           <font>
                                                               <Font name="SansSerif Regular" size="16.0" />
                                                           </font>
@@ -1280,39 +1287,39 @@
                                                       <Insets left="10.0" right="10.0" />
                                                   </padding>
                                               </HBox>
-                                              <HBox fx:id="reactionContainer" maxWidth="-Infinity" styleClass="reactions-container" stylesheets="@../../../../style.css" visible="false">
+                                              <HBox fx:id="reactionsContainer" maxWidth="-Infinity" styleClass="reactions-container" stylesheets="@../../../../style.css" visible="false">
                                                   <children>
-                                                      <ImageView fx:id="imgLikeUser" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fx:id="imgLike" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                                           <image>
                                                               <Image url="@../../../../images/ic_like.png" />
                                                           </image>
                                                       </ImageView>
-                                                      <ImageView fx:id="imgLoveUser" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fx:id="imgLove" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                                           <image>
                                                               <Image url="@../../../../images/ic_love_.png" />
                                                           </image>
                                                       </ImageView>
-                                                      <ImageView fx:id="imgCareUser" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fx:id="imgCare" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                                           <image>
                                                               <Image url="@../../../../images/ic_care.png" />
                                                           </image>
                                                       </ImageView>
-                                                      <ImageView fx:id="imgHahaUser" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fx:id="imgHaha" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                                           <image>
                                                               <Image url="@../../../../images/ic_haha.png" />
                                                           </image>
                                                       </ImageView>
-                                                      <ImageView fx:id="imgWowUser" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fx:id="imgWow" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                                           <image>
                                                               <Image url="@../../../../images/ic_wow.png" />
                                                           </image>
                                                       </ImageView>
-                                                      <ImageView fx:id="imgSadUser" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fx:id="imgSad" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                                           <image>
                                                               <Image url="@../../../../images/ic_sad.png" />
                                                           </image>
                                                       </ImageView>
-                                                      <ImageView fx:id="imgAngryUser" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fx:id="imgAngry" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                                           <image>
                                                               <Image url="@../../../../images/ic_angry.png" />
                                                           </image>
@@ -1329,14 +1336,14 @@
                                       </StackPane>
                                       <HBox stylesheets="@../../../../style.css">
                                           <children>
-                                              <HBox fx:id="likeContainerUser" alignment="CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
+                                              <HBox fx:id="likeContainer" alignment="CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
                                                   <children>
-                                                      <ImageView fx:id="ImageViewReactionUser" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fx:id="ImageViewReaction" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                                           <image>
                                                               <Image url="@../../../../images/ic_like_outline.png" />
                                                           </image>
                                                       </ImageView>
-                                                      <Label fx:id="reactionNameUser" text="Thích" textFill="#606266">
+                                                      <Label fx:id="reactionName" text="Thích" textFill="#606266">
                                                           <font>
                                                               <Font name="SansSerif Bold" size="16.0" />
                                                           </font>
@@ -1377,235 +1384,10 @@
                                           </padding>
                                       </HBox>
                                   </children>
-                                  <VBox.margin>
-                                      <Insets top="15.0" />
-                                  </VBox.margin>
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
                               </VBox>
-
-<!--                              <VBox fx:id="expressApi" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="601.0" spacing="10.0" styleClass="post-background" stylesheets="@../../../../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">-->
-<!--                                  <children>-->
-<!--                                      <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="60.0" spacing="10.0" stylesheets="@../../../../style.css">-->
-<!--                                          <children>-->
-<!--                                              <ImageView fx:id="imgProfileApi" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">-->
-<!--                                                  <image>-->
-<!--                                                      <Image url="@../../../../images/vnexpress.png" />-->
-<!--                                                  </image>-->
-<!--                                              </ImageView>-->
-<!--                                              <VBox alignment="CENTER" prefHeight="60.0" prefWidth="392.0">-->
-<!--                                                  <children>-->
-<!--                                                      <HBox alignment="CENTER_LEFT">-->
-<!--                                                          <children>-->
-<!--                                                              <Label fx:id="usernameApi" text="Đặng Quốc Huy">-->
-<!--                                                                  <font>-->
-<!--                                                                      <Font name="SansSerif Bold" size="18.0" />-->
-<!--                                                                  </font>-->
-<!--                                                              </Label>-->
-<!--                                                              <ImageView fx:id="imgVerifiedApi" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">-->
-<!--                                                                  <image>-->
-<!--                                                                      <Image url="@../../../../images/bluetick.png" />-->
-<!--                                                                  </image>-->
-<!--                                                                  <HBox.margin>-->
-<!--                                                                      <Insets left="5.0" right="5.0" />-->
-<!--                                                                  </HBox.margin>-->
-<!--                                                              </ImageView>-->
-<!--                                                          </children>-->
-<!--                                                          <VBox.margin>-->
-<!--                                                              <Insets />-->
-<!--                                                          </VBox.margin>-->
-<!--                                                      </HBox>-->
-<!--                                                      <HBox alignment="CENTER_LEFT">-->
-<!--                                                          <children>-->
-<!--                                                              <Label fx:id="dateApi" text="12h" textFill="#616770">-->
-<!--                                                                  <font>-->
-<!--                                                                      <Font size="15.0" />-->
-<!--                                                                  </font>-->
-<!--                                                              </Label>-->
-<!--                                                              <ImageView fx:id="audience" fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">-->
-<!--                                                                  <image>-->
-<!--                                                                      <Image url="@../../../../images/ic_pub.png" />-->
-<!--                                                                  </image>-->
-<!--                                                                  <HBox.margin>-->
-<!--                                                                      <Insets left="5.0" right="5.0" />-->
-<!--                                                                  </HBox.margin>-->
-<!--                                                              </ImageView>-->
-<!--                                                          </children>-->
-<!--                                                      </HBox>-->
-<!--                                                  </children>-->
-<!--                                              </VBox>-->
-<!--&lt;!&ndash;                                              Bài đăng dành cho người dùng&ndash;&gt;-->
-
-<!--                                              <Pane prefHeight="200.0" HBox.hgrow="ALWAYS" />-->
-<!--                                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">-->
-<!--                                                  <image>-->
-<!--                                                      <Image url="@../../../../images/moree.png" />-->
-<!--                                                  </image>-->
-<!--                                                  <HBox.margin>-->
-<!--                                                      <Insets />-->
-<!--                                                  </HBox.margin>-->
-<!--                                              </ImageView>-->
-<!--                                          </children>-->
-<!--                                          <padding>-->
-<!--                                              <Insets left="20.0" right="20.0" />-->
-<!--                                          </padding>-->
-<!--                                      </HBox>-->
-<!--                                      <Label fx:id="captionApi" maxWidth="1.7976931348623157E308" text="Social Network UI with JavaFx built by Danieldev" wrapText="true">-->
-<!--                                          <VBox.margin>-->
-<!--                                              <Insets left="20.0" right="20.0" />-->
-<!--                                          </VBox.margin>-->
-<!--                                          <font>-->
-<!--                                              <Font name="SansSerif Regular" size="16.0" />-->
-<!--                                          </font>-->
-<!--                                      </Label>-->
-<!--                                      <ImageView fx:id="imgPostApi" fitHeight="535.0" fitWidth="535.0" pickOnBounds="true" preserveRatio="true">-->
-<!--                                 <image>-->
-<!--                                    <Image url="@../../../../images/anhdaidien.png" />-->
-<!--                                 </image>-->
-<!--                                      </ImageView>-->
-<!--                                      <StackPane alignment="CENTER_LEFT">-->
-<!--                                          <children>-->
-<!--                                              <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="565.0" spacing="10.0">-->
-<!--                                                  <children>-->
-<!--                                                      <HBox alignment="CENTER" spacing="1.0">-->
-<!--                                                          <children>-->
-<!--                                                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">-->
-<!--                                                                  <image>-->
-<!--                                                                      <Image url="@../../../../images/ic_like.png" />-->
-<!--                                                                  </image>-->
-<!--                                                              </ImageView>-->
-<!--                                                              <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">-->
-<!--                                                                  <image>-->
-<!--                                                                      <Image url="@../../../../images/heart.png" />-->
-<!--                                                                  </image>-->
-<!--                                                              </ImageView>-->
-<!--                                                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">-->
-<!--                                                                  <image>-->
-<!--                                                                      <Image url="@../../../../images/ic_care.png" />-->
-<!--                                                                  </image>-->
-<!--                                                              </ImageView>-->
-<!--                                                              <Label fx:id="hlReactions" maxWidth="1.7976931348623157E308" text="12k lượt thích" textFill="#606266">-->
-<!--                                                                  <font>-->
-<!--                                                                      <Font name="SansSerif Regular" size="16.0" />-->
-<!--                                                                  </font>-->
-<!--                                                              </Label>-->
-<!--                                                          </children>-->
-<!--                                                      </HBox>-->
-<!--                                                      <Pane prefHeight="200.0" prefWidth="146.0" HBox.hgrow="ALWAYS" />-->
-<!--                                                      <Label fx:id="hlComments" text="2.3k bình luận" textFill="#606266">-->
-<!--                                                          <font>-->
-<!--                                                              <Font name="SansSerif Regular" size="16.0" />-->
-<!--                                                          </font>-->
-<!--                                                      </Label>-->
-<!--                                                      <Label fx:id="hlShares" text="1.5k chia sẻ" textFill="#606266">-->
-<!--                                                          <font>-->
-<!--                                                              <Font name="SansSerif Regular" size="16.0" />-->
-<!--                                                          </font>-->
-<!--                                                      </Label>-->
-<!--                                                  </children>-->
-<!--                                                  <padding>-->
-<!--                                                      <Insets left="10.0" right="10.0" />-->
-<!--                                                  </padding>-->
-<!--                                              </HBox>-->
-<!--                                              <HBox fx:id="reactionsContainer" maxWidth="-Infinity" styleClass="reactions-container" stylesheets="@../../../../style.css" visible="false">-->
-<!--                                                  <children>-->
-<!--                                                      <ImageView fx:id="imgLike" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">-->
-<!--                                                          <image>-->
-<!--                                                              <Image url="@../../../../images/ic_like.png" />-->
-<!--                                                          </image>-->
-<!--                                                      </ImageView>-->
-<!--                                                      <ImageView fx:id="imgLove" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">-->
-<!--                                                          <image>-->
-<!--                                                              <Image url="@../../../../images/ic_love_.png" />-->
-<!--                                                          </image>-->
-<!--                                                      </ImageView>-->
-<!--                                                      <ImageView fx:id="imgCare" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">-->
-<!--                                                          <image>-->
-<!--                                                              <Image url="@../../../../images/ic_care.png" />-->
-<!--                                                          </image>-->
-<!--                                                      </ImageView>-->
-<!--                                                      <ImageView fx:id="imgHaha" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">-->
-<!--                                                          <image>-->
-<!--                                                              <Image url="@../../../../images/ic_haha.png" />-->
-<!--                                                          </image>-->
-<!--                                                      </ImageView>-->
-<!--                                                      <ImageView fx:id="imgWow" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">-->
-<!--                                                          <image>-->
-<!--                                                              <Image url="@../../../../images/ic_wow.png" />-->
-<!--                                                          </image>-->
-<!--                                                      </ImageView>-->
-<!--                                                      <ImageView fx:id="imgSad" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">-->
-<!--                                                          <image>-->
-<!--                                                              <Image url="@../../../../images/ic_sad.png" />-->
-<!--                                                          </image>-->
-<!--                                                      </ImageView>-->
-<!--                                                      <ImageView fx:id="imgAngry" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">-->
-<!--                                                          <image>-->
-<!--                                                              <Image url="@../../../../images/ic_angry.png" />-->
-<!--                                                          </image>-->
-<!--                                                      </ImageView>-->
-<!--                                                  </children>-->
-<!--                                                  <StackPane.margin>-->
-<!--                                                      <Insets left="10.0" />-->
-<!--                                                  </StackPane.margin>-->
-<!--                                                  <padding>-->
-<!--                                                      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />-->
-<!--                                                  </padding>-->
-<!--                                              </HBox>-->
-<!--                                          </children>-->
-<!--                                      </StackPane>-->
-<!--                                      <HBox stylesheets="@../../../../style.css">-->
-<!--                                          <children>-->
-<!--                                              <HBox fx:id="likeContainer" alignment="CENTER" spacing="10.0" HBox.hgrow="ALWAYS">-->
-<!--                                                  <children>-->
-<!--                                                      <ImageView fx:id="ImageViewReaction" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">-->
-<!--                                                          <image>-->
-<!--                                                              <Image url="@../../../../images/ic_like_outline.png" />-->
-<!--                                                          </image>-->
-<!--                                                      </ImageView>-->
-<!--                                                      <Label fx:id="reactionName" text="Thích" textFill="#606266">-->
-<!--                                                          <font>-->
-<!--                                                              <Font name="SansSerif Bold" size="16.0" />-->
-<!--                                                          </font>-->
-<!--                                                      </Label>-->
-<!--                                                  </children>-->
-<!--                                              </HBox>-->
-<!--                                              <HBox alignment="CENTER" spacing="10.0" HBox.hgrow="ALWAYS">-->
-<!--                                                  <children>-->
-<!--                                                      <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">-->
-<!--                                                          <image>-->
-<!--                                                              <Image url="@../../../../images/ic_cmt.png" />-->
-<!--                                                          </image>-->
-<!--                                                      </ImageView>-->
-<!--                                                      <Label text="Bình luận" textFill="#606266">-->
-<!--                                                          <font>-->
-<!--                                                              <Font name="SansSerif Bold" size="16.0" />-->
-<!--                                                          </font>-->
-<!--                                                      </Label>-->
-<!--                                                  </children>-->
-<!--                                              </HBox>-->
-<!--                                              <HBox alignment="CENTER" spacing="10.0" HBox.hgrow="ALWAYS">-->
-<!--                                                  <children>-->
-<!--                                                      <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">-->
-<!--                                                          <image>-->
-<!--                                                              <Image url="@../../../../images/share.png" />-->
-<!--                                                          </image>-->
-<!--                                                      </ImageView>-->
-<!--                                                      <Label text="Chia sẻ" textFill="#606266">-->
-<!--                                                          <font>-->
-<!--                                                              <Font name="SansSerif Bold" size="16.0" />-->
-<!--                                                          </font>-->
-<!--                                                      </Label>-->
-<!--                                                  </children>-->
-<!--                                              </HBox>-->
-<!--                                          </children>-->
-<!--                                          <padding>-->
-<!--                                              <Insets bottom="10.0" top="10.0" />-->
-<!--                                          </padding>-->
-<!--                                      </HBox>-->
-<!--                                  </children>-->
-<!--                           <VBox.margin>-->
-<!--                              <Insets top="15.0" />-->
-<!--                           </VBox.margin>-->
-<!--                              </VBox>-->
                           </children>
 
                       </VBox>
@@ -1714,193 +1496,6 @@
                                  </viewport>
                               </ImageView>
                               <Label prefHeight="19.0" prefWidth="201.0" text="Đặng Long Nhật">
-                                 <font>
-                                    <Font name="Tahoma Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="10.0" styleClass="hbox-left">
-                           <children>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="round-avt">
-                                 <image>
-                                    <Image url="@../../../../images/congchua.png" />
-                                 </image>
-                                 <viewport>
-                                    <Rectangle2D />
-                                 </viewport>
-                              </ImageView>
-                              <Label prefHeight="19.0" prefWidth="201.0" text="Nguyễn Lynh">
-                                 <font>
-                                    <Font name="Tahoma Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="10.0" styleClass="hbox-left">
-                           <children>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="round-avt">
-                                 <image>
-                                    <Image url="@../../../../images/logo.png" />
-                                 </image>
-                                 <viewport>
-                                    <Rectangle2D />
-                                 </viewport>
-                              </ImageView>
-                              <Label prefHeight="19.0" prefWidth="201.0" text="Đặng Quốc Huy">
-                                 <font>
-                                    <Font name="Tahoma Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="10.0" styleClass="hbox-left">
-                           <children>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="round-avt">
-                                 <image>
-                                    <Image url="@../../../../images/logo.png" />
-                                 </image>
-                                 <viewport>
-                                    <Rectangle2D />
-                                 </viewport>
-                              </ImageView>
-                              <Label prefHeight="19.0" prefWidth="201.0" text="Đặng Quốc Huy">
-                                 <font>
-                                    <Font name="Tahoma Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="10.0" styleClass="hbox-left">
-                           <children>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="round-avt">
-                                 <image>
-                                    <Image url="@../../../../images/logo.png" />
-                                 </image>
-                                 <viewport>
-                                    <Rectangle2D />
-                                 </viewport>
-                              </ImageView>
-                              <Label prefHeight="19.0" prefWidth="201.0" text="Đặng Quốc Huy">
-                                 <font>
-                                    <Font name="Tahoma Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="10.0" styleClass="hbox-left">
-                           <children>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="round-avt">
-                                 <image>
-                                    <Image url="@../../../../images/logo.png" />
-                                 </image>
-                                 <viewport>
-                                    <Rectangle2D />
-                                 </viewport>
-                              </ImageView>
-                              <Label prefHeight="19.0" prefWidth="201.0" text="Đặng Quốc Huy">
-                                 <font>
-                                    <Font name="Tahoma Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="10.0" styleClass="hbox-left">
-                           <children>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="round-avt">
-                                 <image>
-                                    <Image url="@../../../../images/logo.png" />
-                                 </image>
-                                 <viewport>
-                                    <Rectangle2D />
-                                 </viewport>
-                              </ImageView>
-                              <Label prefHeight="19.0" prefWidth="201.0" text="Đặng Quốc Huy">
-                                 <font>
-                                    <Font name="Tahoma Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="10.0" styleClass="hbox-left">
-                           <children>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="round-avt">
-                                 <image>
-                                    <Image url="@../../../../images/logo.png" />
-                                 </image>
-                                 <viewport>
-                                    <Rectangle2D />
-                                 </viewport>
-                              </ImageView>
-                              <Label prefHeight="19.0" prefWidth="201.0" text="Đặng Quốc Huy">
-                                 <font>
-                                    <Font name="Tahoma Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="10.0" styleClass="hbox-left">
-                           <children>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="round-avt">
-                                 <image>
-                                    <Image url="@../../../../images/logo.png" />
-                                 </image>
-                                 <viewport>
-                                    <Rectangle2D />
-                                 </viewport>
-                              </ImageView>
-                              <Label prefHeight="19.0" prefWidth="201.0" text="Đặng Quốc Huy">
-                                 <font>
-                                    <Font name="Tahoma Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="10.0">
-                           <children>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="round-avt">
-                                 <image>
-                                    <Image url="@../../../../images/logo.png" />
-                                 </image>
-                                 <viewport>
-                                    <Rectangle2D />
-                                 </viewport>
-                              </ImageView>
-                              <Label prefHeight="19.0" prefWidth="201.0" text="Đặng Quốc Huy">
-                                 <font>
-                                    <Font name="Tahoma Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="10.0">
-                           <children>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="round-avt">
-                                 <image>
-                                    <Image url="@../../../../images/logo.png" />
-                                 </image>
-                                 <viewport>
-                                    <Rectangle2D />
-                                 </viewport>
-                              </ImageView>
-                              <Label prefHeight="19.0" prefWidth="201.0" text="Đặng Quốc Huy">
-                                 <font>
-                                    <Font name="Tahoma Bold" size="15.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="200.0" spacing="10.0">
-                           <children>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="round-avt">
-                                 <image>
-                                    <Image url="@../../../../images/logo.png" />
-                                 </image>
-                                 <viewport>
-                                    <Rectangle2D />
-                                 </viewport>
-                              </ImageView>
-                              <Label prefHeight="19.0" prefWidth="201.0" text="Đặng Quốc Huy">
                                  <font>
                                     <Font name="Tahoma Bold" size="15.0" />
                                  </font>

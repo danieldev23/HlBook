@@ -10,6 +10,10 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,14 +24,25 @@ import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutionException;
 
 public class HlBookController implements Initializable {
+
+    private static int res = 0;
+    private boolean isLiked = false;
     private String image;
+    @FXML
+    private Hyperlink urlAPI;
+    @FXML
+    private ImageView likeImg;
     @FXML
     private ImageView profileAuthor;
     private int postIdDelete;
@@ -60,6 +75,8 @@ public class HlBookController implements Initializable {
     private TextArea postCaption;
     @FXML
     private VBox postImg;
+    @FXML
+    private Label randomReactions;
     @FXML
     private Button postImgBtn;
     @FXML
@@ -211,7 +228,11 @@ public class HlBookController implements Initializable {
     }
 
     public void setCaptionApi() throws Exception {
-        this.captionApi.setText(new MultiThreadApi().getApi()[0]);
+        this.captionApi.setText(new MultiThreadApi().getApi()[2] + "\n"
+                + new MultiThreadApi().getApi()[0]);
+
+        urlAPI.setText(new MultiThreadApi().getApi()[3]);
+
         String img = new MultiThreadApi().getApi()[1];
         ImageView image = new ImageView(img);
         this.imgPostApi.setImage(image.getImage());
@@ -227,6 +248,22 @@ public class HlBookController implements Initializable {
             System.out.println("Posted succesfully1");
             showRandomPostUser();
         }
+    }
+
+    public void likePostBtn(ActionEvent event) {
+        if (isLiked) {
+            likeImg.setImage(new Image("https://cdn-icons-png.flaticon.com/512/4926/4926586.png"));
+        } else {
+            likeImg.setImage(new Image("https://cdn-icons-png.flaticon.com/512/4926/4926585.png"));
+        }
+
+        // Đảo ngược trạng thái của biến isLiked
+        isLiked = !isLiked;
+
+        // Hiển thị giá trị trên giao diện
+        randomReactions.setText(String.valueOf(isLiked ? res + 1 : res + 0));
+
+        System.out.println("Like clicked!");
     }
     public void showViewPostRandom() {
         getShowPostUser().setPrefWidth(601.0);
@@ -344,7 +381,7 @@ public class HlBookController implements Initializable {
         });
     }
     public void setUsernameApi() throws Exception {
-        this.usernameApi.setText("VnExpress");
+        this.usernameApi.setText("Dev.to");
     }
     @FXML
     public void logout(ActionEvent event) throws IOException {
@@ -368,21 +405,24 @@ public class HlBookController implements Initializable {
                 // Xử lý lỗi ở đây, ví dụ: hiển thị ảnh mặc định hoặc thông báo lỗi cho người dùng.
             }
         }
-//        else {
-//            Image image = new Image("/Users/macbook/Documents/Projects/Java/HuyLinhSocial/src/main/resources/images/person.png");
-//            userImg.setImage(image);
-//            imageUser.setImage(image);
-//        }
     }
 
     public void init() throws Exception {
+        randomReactions.setText(String.valueOf(res));
         imgProfilePost.setImage(new Image(getAvatar()));
+        urlAPI.setOnAction(event -> {
+            try {
+                Desktop.getDesktop().browse(new URI(new MultiThreadApi().getApi()[3]));
+            } catch (IOException | URISyntaxException | ExecutionException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
         setImageUser();
         showRandomPostUser();
         setName();
-//        setUsernameApi();
-//        setDateApi();
-//        setCaptionApi();
+        setUsernameApi();
+        setDateApi();
+        setCaptionApi();
     }
 
     @Override

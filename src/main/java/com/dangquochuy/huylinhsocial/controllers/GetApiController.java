@@ -16,15 +16,16 @@ public class GetApiController {
 
     private ObservableList<Article> articleList = FXCollections.observableArrayList();
     private String author;
+
     private String description;
     private String images;
-
-    private static int res = (int) (Math.random() * 50 + 1);
+    private String url;
+    private static int res = (int) (Math.random() * 10 + 1);
     public String[] returnData(int res)throws Exception{
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://newsapi.org/v2/everything?domains=vnexpress.net&apiKey=809e7980a9c746f6b3e94a19c5b2f051"))
+                .uri(URI.create("https://newsapi.org/v2/everything?domains=dev.to&apiKey=809e7980a9c746f6b3e94a19c5b2f051"))
                 .GET()
                 .build();
 
@@ -37,7 +38,7 @@ public class GetApiController {
 
         String authorApi = data.getJSONArray("articles")
                 .getJSONObject(res)
-                .get("author")
+                .get("title")
                 .toString();
 
         String description = data.getJSONArray("articles")
@@ -50,11 +51,11 @@ public class GetApiController {
                 .get("urlToImage")
                 .toString();
 //
-//        String url = data.getJSONArray("articles")
-//                .getJSONObject(res)
-//                .get("url")
-//                .toString();
-        String[] article = {authorApi, description, images};
+        String url = data.getJSONArray("articles")
+                .getJSONObject(res)
+                .get("url")
+                .toString();
+        String[] article = {authorApi, description, images, url};
         return article;
     }
     public String getAuthor() throws Exception {
@@ -63,7 +64,11 @@ public class GetApiController {
         this.author = data[0];
         return author;
     }
-
+    public String getUrl() throws Exception {
+        String[] data = returnData(this.res);
+        this.url = data[3];
+        return url;
+    }
     public String getDescription() throws Exception {
         String[] data = returnData(this.res);
         this.description = data[1];

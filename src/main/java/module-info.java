@@ -10,6 +10,7 @@ module com.dangquochuy.huylinhsocial {
     requires java.sql;
     requires mysql.connector.j;
     requires javafx.web;
+    requires java.desktop;
 
     opens com.dangquochuy.huylinhsocial to javafx.fxml;
 
